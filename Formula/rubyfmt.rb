@@ -14,11 +14,11 @@ class Rubyfmt < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:  "ac11feb657dbe095a59e0bbbe1e8adbd8fe5eaa6dd989e36204780697b200e92"
   end
 
-  uses_from_macos "ruby"
+  depends_on "rust" => :build
 
   def install
-    system "make"
-    bin.install "build/rubyfmt.rb" => "rubyfmt"
+    system "make", "release"
+    bin.install "target/release/rubyfmt-main" => "rubyfmt"
   end
 
   test do
