@@ -28,12 +28,45 @@ class Algol68g < Formula
     sha256                               x86_64_linux:   "3db30a51c50dc264cf0f7d261fb936a17ffad5cb14f73b105e44a69a10d56f30"
   end
 
+  depends_on "gcc"
+
+  uses_from_macos "ncurses"
+
   on_linux do
+    depends_on "mpfr"
     depends_on "postgresql"
   end
 
+  fails_with :clang do
+    cause <<-EOS
+      configure: error: stop -- C compiler does not support __attribute__aligned directive
+      conftest.c:17:25: error: function definition is not allowed here
+      inline void skip (void) {;}
+                              ^
+    EOS
+  end
+
+  # /home/linuxbrew/.linuxbrew/include/mpfr.h:467:50: error: unknown type name '_Float128'
+  fails_with gcc: "5"
+
   def install
-    system "./configure", "--prefix=#{prefix}"
+    inreplace "Makefile.in" do |s|
+      # Work around the hardcoded include directory
+      s.gsub! "= /usr/local/include/algol68g", "= #{include}/algol68g"
+
+      # Work around macOS build error. Env variables like LDFLAGS, CFLAGS, DEFS aren't picked up.
+      # ./src/a68g/a68glib.c:46:7: error: expected declaration specifiers or '...' before numeric constant
+      #    46 |   int vsnprintf (char *, size_t, const char *, va_list);
+      #       |       ^~~~~~~~~
+      s.gsub!(/^DEFS =.*$/, "\\0 -D_FORTIFY_SOURCE=0") if OS.mac?
+    end
+
+    args = std_configure_args
+    # On macOS, Homebrew's `mpfr` formula is not built with float128 support
+    # and causes errors for undefined symbols "_mpfr_get_float128"
+    args << "--disable-mpfr" if OS.mac?
+
+    system "./configure", *args
     system "make", "install"
   end
 
