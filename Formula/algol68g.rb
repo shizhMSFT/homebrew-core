@@ -50,6 +50,15 @@ class Algol68g < Formula
   fails_with gcc: "5"
 
   def install
+    if Hardware::CPU.arm?
+      # ARM macOS should use isfinite from math.h but configure doesn't check this
+      ENV["ac_cv_func_isfinite"] = "yes"
+
+      # Fix detection of ARM macOS to set build defines
+      inreplace "configure", " | *86_64-*-*darwin*)",
+                             " | *86_64-*-*darwin* | arm*-*-*darwin* | aarch*-*-*darwin*)"
+    end
+
     inreplace "Makefile.in" do |s|
       # Work around the hardcoded include directory
       s.gsub! "= /usr/local/include/algol68g", "= #{include}/algol68g"
