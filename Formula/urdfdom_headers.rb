@@ -32,7 +32,7 @@ class UrdfdomHeaders < Formula
         return 0;
       }
     EOS
-    system ENV.cxx, "test.cpp", "-std=c++11", "-o", "test"
+    system ENV.cxx, "test.cpp", "-std=c++11", "-o", "test", "-I#{opt_include}/urdfdom_headers"
     system "./test"
   end
 end
