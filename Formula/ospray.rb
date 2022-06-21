@@ -26,13 +26,13 @@ class Ospray < Formula
   depends_on "tbb"
 
   resource "rkcommon" do
-    url "https://github.com/ospray/rkcommon/archive/v1.9.0.tar.gz"
-    sha256 "b68aa02ef44c9e35c168f826a14802bb5cc6a9d769ba4b64b2c54f347a14aa53"
+    url "https://github.com/ospray/rkcommon/archive/v1.10.0.tar.gz"
+    sha256 "57a33ce499a7fc5a5aaffa39ec7597115cf69ed4ff773546b5b71ff475ee4730"
   end
 
   resource "openvkl" do
-    url "https://github.com/openvkl/openvkl/archive/v1.2.0.tar.gz"
-    sha256 "dc468c2f0a359aaa946e04a01c2a6634081f7b6ce31b3c212c74bf7b4b0c9ec2"
+    url "https://github.com/openvkl/openvkl/archive/v1.3.0.tar.gz"
+    sha256 "c6d4d40e6d232839c278b53dee1e7bd3bd239c3ccac33f49b465fc65a0692be9"
   end
 
   def install
