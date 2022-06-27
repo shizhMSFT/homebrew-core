@@ -10,6 +10,8 @@ class Emojify < Formula
     sha256 cellar: :any_skip_relocation, all: "525c599c9e16d63627d5b4afca9f43d22e456d21a8e00a05b5e4a4e2acded629"
   end
 
+  depends_on "bash"
+
   def install
     bin.install "emojify"
   end
