@@ -1,8 +1,8 @@
 class Logstash < Formula
   desc "Tool for managing events and logs"
   homepage "https://www.elastic.co/products/logstash"
-  url "https://github.com/elastic/logstash/archive/v8.0.1.tar.gz"
-  sha256 "61693d62bc98a787b8048c623103654cce8897eea3ffceef02145927d16e1a60"
+  url "https://github.com/elastic/logstash/archive/v8.3.1.tar.gz"
+  sha256 "b0474ef0a0c6cf86e9595de0f303eac823695543329b99a44fb1b186f8081e16"
   license "Apache-2.0"
   version_scheme 1
   head "https://github.com/elastic/logstash.git", branch: "main"
@@ -19,7 +19,8 @@ class Logstash < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux: "45dba95a34b5a20ccc228168735ac903996cda958c9021957eb68f30f11b4df4"
   end
 
-  depends_on "openjdk@11"
+  depends_on arch: :x86_64
+  depends_on "openjdk@17"
 
   uses_from_macos "ruby" => :build
 
