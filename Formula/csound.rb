@@ -5,7 +5,7 @@ class Csound < Formula
       tag:      "6.17.0",
       revision: "f5b4258794a82c99f7d85f1807c6638f2e80ccac"
   license "LGPL-2.1-or-later"
-  revision 5
+  revision 6
   head "https://github.com/csound/csound.git", branch: "master"
 
   livecheck do
@@ -86,6 +86,7 @@ class Csound < Formula
 
   def install
     ENV["JAVA_HOME"] = Language::Java.java_home
+    ENV.remove "HOMEBREW_LIBRARY_PATHS", Formula["llvm"].opt_lib
 
     args = [
       "-DBUILD_JAVA_INTERFACE=ON",
