@@ -34,7 +34,6 @@ class Vlang < Formula
     # to avoid building from arbitrary commits in the `vc` repo.
     resource("vc").stage do
       bootstrap_libs = %w[-lm -lpthread]
-      bootstrap_libs.insert(1, "-lexecinfo") unless OS.mac?
       cflags = ENV.cflags&.split.to_a
       ldflags = ENV.ldflags&.split.to_a
       system ENV.cc, "-std=gnu11", *cflags, "-w", "-o", buildpath/"v1", "v.c", *bootstrap_libs, *ldflags
