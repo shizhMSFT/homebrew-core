@@ -30,16 +30,11 @@ class Vlang < Formula
   end
 
   def install
-    # Check build commands in the `Makefile`. We don't use `make`
-    # to avoid building from arbitrary commits in the `vc` repo.
-    resource("vc").stage do
-      bootstrap_libs = %w[-lm -lpthread]
-      cflags = ENV.cflags&.split.to_a
-      ldflags = ENV.ldflags&.split.to_a
-      system ENV.cc, "-std=gnu11", *cflags, "-w", "-o", buildpath/"v1", "v.c", *bootstrap_libs, *ldflags
-    end
-    system "./v1", "-no-parallel", "-o", "v2", "cmd/v"
-    system "./v2", "-o", "v", "cmd/v"
+    vc = buildpath/"vc"
+    vc.install resource("vc")
+    (buildpath/"thirdparty/tcc/tcc.exe").write_exec_script ENV.cc
+
+    system "make", "VC=#{vc}", "local=1", "prod=1"
     libexec.install "cmd", "thirdparty", "v", "v.mod", "vlib"
     bin.install_symlink libexec/"v"
     pkgshare.install "examples"
