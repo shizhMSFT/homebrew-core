@@ -32,9 +32,8 @@ class Vlang < Formula
   def install
     vc = buildpath/"vc"
     vc.install resource("vc")
-    (buildpath/"thirdparty/tcc/tcc.exe").write_exec_script ENV.cc
-
     system "make", "VC=#{vc}", "local=1", "prod=1"
+
     libexec.install "cmd", "thirdparty", "v", "v.mod", "vlib"
     bin.install_symlink libexec/"v"
     pkgshare.install "examples"
