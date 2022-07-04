@@ -298,7 +298,7 @@
     "exclude_packages": ["six"]
   },
   "pipenv": {
-    "exclude_packages": ["six"]
+    "exclude_packages": ["six", "virtualenv"]
   },
   "pipgrip": {
     "exclude_packages": ["six"],

@@ -3,8 +3,8 @@ class Pipenv < Formula
 
   desc "Python dependency management tool"
   homepage "https://github.com/pypa/pipenv"
-  url "https://files.pythonhosted.org/packages/14/15/72379e0884455c9b517015e8e5771c69e13749799af460e9199c3c7f6ab9/pipenv-2022.6.7.tar.gz"
-  sha256 "6ac0e7a8bbe02859d46c53c03d3f33136bbf49c8c7d9a6d818409e17a604eda0"
+  url "https://files.pythonhosted.org/packages/a2/d1/50890e2d3b018230cecf3e0d2597b6cc2d535f6a8b84bf3f9981e42ad989/pipenv-2022.7.4.tar.gz"
+  sha256 "18420fbae2851d2b9d70d1e00f77a8c55d09704a177fe872a0a2da56e98eb018"
   license "MIT"
 
   bottle do
@@ -18,30 +18,11 @@ class Pipenv < Formula
 
   depends_on "python@3.10"
   depends_on "six"
+  depends_on "virtualenv"
 
   resource "certifi" do
-    url "https://files.pythonhosted.org/packages/07/10/75277f313d13a2b74fc56e29239d5c840c2bf09f17bf25c02b35558812c6/certifi-2022.5.18.1.tar.gz"
-    sha256 "9c5705e395cd70084351dd8ad5c41e65655e08ce46f2ec9cf6c2c08390f71eb7"
-  end
-
-  resource "distlib" do
-    url "https://files.pythonhosted.org/packages/85/01/88529c93e41607f1a78c1e4b346b24c74ee43d2f41cfe33ecd2e20e0c7e3/distlib-0.3.4.zip"
-    sha256 "e4b58818180336dc9c529bfb9a0b58728ffc09ad92027a3f30b7cd91e3458579"
-  end
-
-  resource "filelock" do
-    url "https://files.pythonhosted.org/packages/f3/c7/5c1aef87f1197d2134a096c0264890969213c9cbfb8a4102087e8d758b5c/filelock-3.7.1.tar.gz"
-    sha256 "3a0fd85166ad9dbab54c9aec96737b744106dc5f15c0b09a6744a445299fcf04"
-  end
-
-  resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/ff/7b/3613df51e6afbf2306fc2465671c03390229b55e3ef3ab9dd3f846a53be6/platformdirs-2.5.2.tar.gz"
-    sha256 "58c8abb07dcb441e6ee4b11d8df0ac856038f944ab98b7be6b27b2a3c7feef19"
-  end
-
-  resource "virtualenv" do
-    url "https://files.pythonhosted.org/packages/5f/6c/d44c403a54ceb4ec5179d1a963c69887d30dc5b300529ce67c05b4f16212/virtualenv-20.14.1.tar.gz"
-    sha256 "ef589a79795589aada0c1c5b319486797c03b67ac3984c48c669c0e4f50df3a5"
+    url "https://files.pythonhosted.org/packages/cc/85/319a8a684e8ac6d87a1193090e06b6bbb302717496380e225ee10487c888/certifi-2022.6.15.tar.gz"
+    sha256 "84c85a9078b11105f04f3036a9482ae10e4621616db313fe045dd24743a0820d"
   end
 
   resource "virtualenv-clone" do
