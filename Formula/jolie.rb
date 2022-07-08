@@ -12,12 +12,11 @@ class Jolie < Formula
   depends_on "openjdk"
 
   def install
+    (libexec/"bin").mkpath
     system Formula["openjdk"].opt_bin/"java", "-jar", "jolie-#{version}.jar",
                                               "--jolie-home", libexec,
                                               "--jolie-launchers", libexec/"bin"
-
     bin.install (libexec/"bin").children
-
     jolie_env = Language::Java.overridable_java_home_env
     jolie_env["JOLIE_HOME"] = "${JOLIE_HOME:-#{libexec}}"
     bin.env_script_all_files libexec/"bin", jolie_env
