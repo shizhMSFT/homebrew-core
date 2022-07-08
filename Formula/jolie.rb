@@ -1,8 +1,8 @@
 class Jolie < Formula
   desc "Service-oriented programming language"
   homepage "https://www.jolie-lang.org/"
-  url "https://github.com/jolie/jolie/releases/download/v1.10.9/jolie-1.10.9.jar"
-  sha256 "c07944e5ce9cb7f790972fa711a31a7dfb07d8e3a44d2f2dd80a5e29b20346f1"
+  url "https://github.com/jolie/jolie/releases/download/v1.10.10/jolie-1.10.10.jar"
+  sha256 "486a9bdc412e69565604bbaef09c281394d6984d0570f3746cd5391f5f78243e"
   license "LGPL-2.1-only"
 
   bottle do
@@ -12,14 +12,15 @@ class Jolie < Formula
   depends_on "openjdk"
 
   def install
-    system Formula["openjdk"].opt_bin/"java",
-    "-jar", "jolie-#{version}.jar",
-    "--jolie-home", libexec,
-    "--jolie-launchers", libexec/"bin"
-    bin.install Dir["#{libexec}/bin/*"]
-    bin.env_script_all_files libexec/"bin",
-      JOLIE_HOME: "${JOLIE_HOME:-#{libexec}}",
-      JAVA_HOME:  "${JAVA_HOME:-#{Formula["openjdk"].opt_prefix}}"
+    system Formula["openjdk"].opt_bin/"java", "-jar", "jolie-#{version}.jar",
+                                              "--jolie-home", libexec,
+                                              "--jolie-launchers", libexec/"bin"
+
+    bin.install (libexec/"bin").children
+
+    jolie_env = Language::Java.overridable_java_home_env
+    jolie_env["JOLIE_HOME"] = "${JOLIE_HOME:-#{libexec}}"
+    bin.env_script_all_files libexec/"bin", jolie_env
   end
 
   test do
