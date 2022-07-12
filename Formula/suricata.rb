@@ -28,8 +28,8 @@ class Suricata < Formula
   depends_on "lz4"
   depends_on "nspr"
   depends_on "nss"
-  depends_on "pcre"
-  depends_on "python@3.9"
+  depends_on "pcre2"
+  depends_on "python@3.10"
 
   uses_from_macos "libpcap"
 
