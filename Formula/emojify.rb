@@ -19,7 +19,8 @@ class Emojify < Formula
   test do
     input = "Hey, I just :raising_hand: you, and this is :scream: , but here's my :calling: , " \
             "so :telephone_receiver: me, maybe?"
-    assert_equal "Hey, I just 🙋 you, and this is 😱 , but here's my 📲 , so 📞 me, maybe?",
-      shell_output("#{bin}/emojify \"#{input}\"").strip
+    output = "Hey, I just \\u0001F64B you, and this is \\u0001F631 , " \
+            "but here's my \\u0001F4F2 , so \\u0001F4DE me, maybe?"
+    assert_equal output, shell_output("#{bin}/emojify \"#{input}\"").strip
   end
 end
