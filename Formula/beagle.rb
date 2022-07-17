@@ -25,6 +25,8 @@ class Beagle < Formula
   depends_on "openjdk" => [:build, :test]
 
   def install
+    ENV["JAVA_HOME"] = Formula["openjdk"].opt_prefix
+
     system "cmake", "-S", ".", "-B", "build", *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
