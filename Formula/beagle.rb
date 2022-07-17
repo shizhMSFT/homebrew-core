@@ -21,19 +21,13 @@ class Beagle < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:   "1af7280eaec10e6a5e335326793ca36e36e8b41e507ea891ff3bbfdb3d453d01"
   end
 
-  depends_on "autoconf" => :build
-  depends_on "automake" => :build
-  depends_on "doxygen" => :build
-  depends_on "libtool" => :build
+  depends_on "cmake" => :build
   depends_on "openjdk" => [:build, :test]
 
   def install
-    args = std_configure_args + %w[--without-cuda --disable-libtool-dev]
-    args << "--disable-sse" if Hardware::CPU.arm?
-
-    system "./autogen.sh"
-    system "./configure", *args
-    system "make", "install"
+    system "cmake", "-S", ".", "-B", "build", *std_cmake_args
+    system "cmake", "--build", "build"
+    system "cmake", "--install", "build"
   end
 
   test do
