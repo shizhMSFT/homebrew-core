@@ -19,6 +19,7 @@ class Jupyterlab < Formula
   end
 
   depends_on "python-build" => :build
+  depends_on "jsonschema"
   depends_on "node"
   depends_on "pandoc"
   depends_on "python@3.10"
@@ -155,11 +156,6 @@ class Jupyterlab < Formula
   resource "json5" do
     url "https://files.pythonhosted.org/packages/c3/ba/0a38a13a04436bf631e639d75265c16bfcfb74289cb28347face00795130/json5-0.9.8.tar.gz"
     sha256 "0fa6e4d3ef062f93ba9cf2a9103fe8e68c7917dfa33519ae3ac8c7e48e3c84ff"
-  end
-
-  resource "jsonschema" do
-    url "https://files.pythonhosted.org/packages/19/0f/89db7764dfb59fc1c2b18c2d63f11375b4827aa3e93ae037166a780d2bed/jsonschema-4.7.2.tar.gz"
-    sha256 "73764f461d61eb97a057c929368610a134d1d1fffd858acfe88864ee94f1f1d3"
   end
 
   resource "jupyter-client" do
