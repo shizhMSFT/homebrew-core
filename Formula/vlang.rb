@@ -33,12 +33,7 @@ class Vlang < Formula
     vc = buildpath/"vc"
     vc.install resource("vc")
 
-    # Prevent `v` from looking for a `tcc`.
-    detect_tcc = "cmd/tools/detect_tcc.v"
-    (buildpath/detect_tcc).unlink
-    touch detect_tcc
-
-    system "make", "VC=#{vc}", "local=1", "prod=1"
+    system "make", "VC=#{vc}", "VFLAGS=-v -show-c-output -showcc", "local=1", "prod=1"
     libexec.install "cmd", "thirdparty", "v", "v.mod", "vlib"
     bin.install_symlink libexec/"v"
     pkgshare.install "examples"
