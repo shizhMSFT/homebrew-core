@@ -21,6 +21,15 @@ class Lerna < Formula
   def install
     system "npm", "install", *Language::Node.std_npm_install_args(libexec)
     bin.install_symlink Dir["#{libexec}/bin/*"]
+
+    # Remove incompatible pre-built binaries
+    os = OS.kernel_name.downcase
+    arch = Hardware::CPU.intel? ? "x64" : Hardware::CPU.arch.to_s
+    libexec.glob("lib/node_modules/lerna/node_modules/@parcel/watcher/prebuilds/*")
+           .each { |dir| dir.rmtree if dir.basename.to_s != "#{os}-#{arch}" }
+
+    # Replace universal binaries with their native slices
+    deuniversalize_machos
   end
 
   test do
