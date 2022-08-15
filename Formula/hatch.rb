@@ -16,6 +16,7 @@ class Hatch < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:   "77306587b5e53955e006f3cadb8302447cf03edfad20daac3156c25736ec8341"
   end
 
+  depends_on "rust" => :build # for cryptography
   depends_on "python@3.10"
   depends_on "six"
 
